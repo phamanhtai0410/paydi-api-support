@@ -12,7 +12,7 @@ RUN apk add --no-cache tzdata git && cp /usr/share/zoneinfo/Asia/Ho_Chi_Minh /et
 
 RUN apk upgrade -U \
     && apk add --no-cache -u ca-certificates libffi-dev libva-intel-driver supervisor python3-dev build-base linux-headers pcre-dev curl busybox-extras \
-    && apk add --no-cache librdkafka-dev libexecinfo libexecinfo-dev snappy \
+    && apk add --no-cache librdkafka-dev libexecinfo libexecinfo-dev \
     && rm -rf /tmp/* /var/cache/*
 
 COPY requirements.txt /

@@ -22,7 +22,7 @@ def send_create_report_task(topic: str, value: dict, key: str) -> None:
 @handle_exception()
 def send_push_telegram_report_mess_task(topic: str, value: dict, key: str) -> None:
     send_message_to_topic(topic, {
-        'action': 'PUSH_MESS',
+        'action': 'POST',
         'value': value,
         'key': key
     })

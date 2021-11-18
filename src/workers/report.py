@@ -5,7 +5,7 @@ from src.utils.logger import LoggerTask
 from src.models.report import Report
 from src.utils.send__telegram_mess import *
 from src.config import DefaultConfig
-
+from src.enums.report import ReportEnumKey
 
 class ReportWorker(object):
 
@@ -33,10 +33,10 @@ class ReportWorker(object):
         """
             - The function handle
         """
-        if message.get('action') == 'POST':
+        if message.get('key') == ReportEnumKey.REPORT_CREATE:
             cls.create_report(message.get('value'))
 
-        if message.get('action') == 'PUSH_MESS':
+        if message.get('key') == ReportEnumKey.REPORT_SEND_MESS:
             cls.send_report_mess(message.get('value'))
 
         LoggerTask.debug(f'run_task {message}')
