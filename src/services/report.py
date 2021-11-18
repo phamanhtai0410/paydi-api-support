@@ -9,9 +9,7 @@
         -
 """
 from src.models.report import Report
-from src.producers.report import send_create_report_task, send_push_telegram_report_mess_task
-from bson import ObjectId
-from src.utils.logger import LoggerTask
+from src.producers.report import send_create_report_task
 from src.models.report import Report
 from src.enums.report import ReportEnumKey
 
