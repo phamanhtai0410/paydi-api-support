@@ -58,3 +58,4 @@ pymodm==0.4.3
 marshmallow==3.13.0
 uWSGI==2.0.17.1
 kafka-python==2.0.2
+python-snappy==0.6.0

@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
-
-# File: consumer.py	
+# File: consumer.py
 # Created at 10/11/2021
 """
    Description: 
@@ -49,7 +48,6 @@ def create_app():
 
 
 def configure_extensions():
-
     connect(DefaultConfig.MONGODB_URI, connect=False)
 
     LoggerTask.debug('Connect with MongoDB successfully')
@@ -109,7 +107,6 @@ class Consumer(threading.Thread):
 
         configure_extensions()
         self.handler = handler
-
 
     def run(self) -> None:
         while True:

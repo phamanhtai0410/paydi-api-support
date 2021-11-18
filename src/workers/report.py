@@ -1,4 +1,3 @@
-
 from bson.objectid import ObjectId
 from src.enums import MethodEnum
 from src.utils.datetime import get_current_time
@@ -6,6 +5,8 @@ from src.utils.logger import LoggerTask
 from src.models.report import Report
 from src.utils.send__telegram_mess import *
 from src.config import DefaultConfig
+
+
 class ReportWorker(object):
 
     @staticmethod
@@ -15,15 +16,16 @@ class ReportWorker(object):
     @staticmethod
     def send_report_mess(data):
         message = '<strong>{}: {} </strong> ' \
-              '<pre>' \
-              '<i>" {} "</i> \n' \
-              '<i>" {} "</i> \n' \
-              '<i>" {} "</i> \n' \
-              '</pre> ' \
-              '<a href="">👉👉👉 Chi tiết</a> \n' \
-        .format("Report mới", data.get('type'), data.get('oid'), data.get('images'),
-                data.get('message'))
-        result = send_telegram_message(token_id=DefaultConfig.TELE_SUPPORT_TOKEN_ID, chat_id=DefaultConfig.TELE_SUPPORT_CHAT_ID, message=message)
+                  '<pre>' \
+                  '<i>" {} "</i> \n' \
+                  '<i>" {} "</i> \n' \
+                  '<i>" {} "</i> \n' \
+                  '</pre> ' \
+                  '<a href="">👉👉👉 Chi tiết</a> \n' \
+            .format("Report mới", data.get('type'), data.get('oid'), data.get('images'),
+                    data.get('message'))
+        result = send_telegram_message(token_id=DefaultConfig.TELE_SUPPORT_TOKEN_ID,
+                                       chat_id=DefaultConfig.TELE_SUPPORT_CHAT_ID, message=message)
         LoggerTask.debug(f'send to Tele res = {result}')
 
     @classmethod
