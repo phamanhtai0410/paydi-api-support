@@ -23,7 +23,7 @@ class ReportWorker(object):
                   '<i>Message  : " {} "</i> \n' \
                   '</pre> ' \
                   '<a href="#">👉👉👉 Chi tiết</a> \n' \
-            .format("Report mới", data.get('merchant_id'), data.get('pos_id'),Constants.REPORT_TYPE_DICT.get(data.get('type')),
+            .format("Report mới",  Constants.REPORT_TYPE_DICT.get(data.get('type')), data.get('merchant_id'), data.get('pos_id'),
                     data.get('message'))
 
         
