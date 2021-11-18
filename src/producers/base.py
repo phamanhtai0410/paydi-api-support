@@ -26,4 +26,6 @@ def send_message_to_topic(topic: str, data: dict):
             data['from_services'] = []
         data['from_services'].append(DefaultConfig.PROJECT)
     value = dumps(data)
-    producer.send(topic, value.encode('utf-8'))
+    future = producer.send(topic, value.encode('utf-8'))
+    result = future.get(timeout=60)
+    print('result producer', result)
