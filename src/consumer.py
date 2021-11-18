@@ -35,7 +35,7 @@ from src.workers.report import ReportWorker
 """
 worker_config = {
     'test.group_id_1': Pos,
-    'report_topic.report_workers': ReportWorker
+    'support_topic.report_workers': ReportWorker
 }
 
 
