@@ -1,11 +1,9 @@
-
-
 # File: docker-compose.yml
 # Created at 16/11/2021
 
 version: '3'
 
-services: 
+services:
   backend:
     # Name the service container
     image: support-service
@@ -21,9 +19,11 @@ services:
       - "5015:5005"
 
     networks:
-     - same-network
+      - same-network
 
     command: supervisord -n -c /etc/supervisor.d/supervisord.conf
+    extra_hosts:
+      - "dev2-tiktik-com.cloud.local:203.205.21.196"
 
   workers:
     # Name the service container

@@ -12,7 +12,7 @@
 from marshmallow import Schema, fields, ValidationError, INCLUDE, EXCLUDE, pre_load
 
 from src.schemas.base import BaseResponse, BaseQuery
-from src.utils.format import is_oid, id_response
+from src.utils.format import is_oid, id_response, is_report_type, is_report_type
 
 
 ########################################################################
@@ -23,8 +23,10 @@ class CreateReport(Schema):
     class Meta:
         unknown = INCLUDE
 
-    type = fields.String(required=True, default='app_error')
-    oid = fields.String()
+    type = fields.String(required=True, validate=is_report_type, error_messages={
+        'validator_failed': 'input "type" is not valid !'
+    })
+    oid = fields.String(default='app_oid')
     message = fields.String()
     images = fields.List(fields.String())
 
