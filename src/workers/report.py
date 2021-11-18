@@ -18,10 +18,12 @@ class ReportWorker(object):
     def send_report_mess(data):
         message = '<strong>{}: {} </strong> ' \
                   '<pre>' \
-                  '<i>" {} "</i> \n' \
+                  '<i>Merchant : " {} "</i> \n' \
+                  '<i>Pos ID   : " {} "</i> \n' \
+                  '<i>Message  : " {} "</i> \n' \
                   '</pre> ' \
                   '<a href="#">👉👉👉 Chi tiết</a> \n' \
-            .format("Report mới", Constants.REPORT_TYPE_DICT.get(data.get('type')),
+            .format("Report mới", data.get('merchant_id'), data.get('pos_id'),Constants.REPORT_TYPE_DICT.get(data.get('type')),
                     data.get('message'))
 
         
@@ -34,11 +36,11 @@ class ReportWorker(object):
         """
             - The function handle
         """
-        if message.get('key') == ReportEnumKey.REPORT_CREATE:
-            cls.create_report(message.get('value'))
+        # if message.get('key') == ReportEnumKey.REPORT_CREATE:
+        cls.create_report(message.get('value'))
 
-        if message.get('key') == ReportEnumKey.REPORT_SEND_MESS:
-            cls.send_report_mess(message.get('value'))
+        # if message.get('key') == ReportEnumKey.REPORT_SEND_MESS:
+        cls.send_report_mess(message.get('value'))
 
         LoggerTask.debug(f'run_task {message}')
         pass

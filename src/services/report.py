@@ -19,7 +19,7 @@ class ReportService(object):
 
     @staticmethod
     def create_one(info: dict, pos: dict) -> dict:
-        send_push_telegram_report_mess_task('support_topic', info, ReportEnumKey.REPORT_SEND_MESS)
+        # send_push_telegram_report_mess_task('support_topic', info, ReportEnumKey.REPORT_SEND_MESS)
         _form_data = {
             key: value for (key, value) in info.items()
         }
