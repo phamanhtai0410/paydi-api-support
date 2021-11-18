@@ -34,7 +34,6 @@ from src.workers.report import ReportWorker
         [topic.group_id]: ClassHandler
 """
 worker_config = {
-    'test.group_id_1': Pos,
     'support_topic.report_workers': ReportWorker
 }
 
