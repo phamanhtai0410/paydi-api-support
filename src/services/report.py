@@ -13,14 +13,13 @@ from src.producers.report import send_create_report_task, send_push_telegram_rep
 from bson import ObjectId
 from src.utils.logger import LoggerTask
 from src.models.report import Report
-
+from src.enums.report import ReportEnumKey
 
 class ReportService(object):
 
     @staticmethod
     def create_one(info: dict, pos: dict) -> dict:
-        key = ObjectId()
-        send_push_telegram_report_mess_task('support_topic', info, key)
+        send_push_telegram_report_mess_task('support_topic', info, ReportEnumKey.REPORT_SEND_MESS)
         _form_data = {
             key: value for (key, value) in info.items()
         }
@@ -30,5 +29,5 @@ class ReportService(object):
         _form_data['pos_id'] = pos.get('pos_id')
         # report = Report.add(_form_data)
         # global_workers => report, log, activity
-        send_create_report_task('support_topic', info, str(key))
+        send_create_report_task('support_topic', _form_data, ReportEnumKey.REPORT_CREATE)
         return {}
