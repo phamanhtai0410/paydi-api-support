@@ -34,7 +34,7 @@ def create_report(pos):
         if data.get('merchant_id') and data.get('terminal_id'):
             pos_info = {
                 'merchant_id': data.get('merchant_id'),
-                'terminal_id': data.get('terminal_id', '')
+                'tid': data.get('terminal_id')
             }
             ReportService.create_one(data, pos_info)
             return data
