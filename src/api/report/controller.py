@@ -1,0 +1,39 @@
+# -*- coding: utf-8 -*-
+
+
+
+# File: controller.py
+# Created at 16/11/2021
+"""
+   Description:
+        -
+        -
+"""
+from datetime import datetime
+from src.decorators.response import handle_response
+from src.exceptions import ExceptionNotFound
+
+from bson import ObjectId
+from flask import g
+
+from src.decorators.request import load_data
+from src.decorators.auth import auth_pos
+from src.schemas.report import *
+from src.utils.logger import Logger, LoggerTask
+from src.services.report import ReportService
+
+
+@handle_response()
+@load_data(CreateReport)
+@auth_pos()
+def create_report(pos):
+    data = g.data
+    Logger.debug('Create report - info ', data)
+    Logger.debug('Create report - pos ', pos)
+
+    # if not data:
+    #     raise ExceptionNotFound
+    report = ReportService.create_one(data, pos)
+    
+    return data
+
