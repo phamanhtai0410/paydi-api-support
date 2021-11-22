@@ -26,7 +26,6 @@ class ReportWorker(object):
             .format("Report mới",  Constants.REPORT_TYPE_DICT.get(data.get('type')), data.get('merchant_id'), data.get('pos_id'),
                     data.get('message'))
 
-        
         result = send_telegram_message(token_id=DefaultConfig.TELE_SUPPORT_TOKEN_ID,
                                        chat_id=DefaultConfig.TELE_SUPPORT_CHAT_ID, message=message)
         LoggerTask.debug(f'send to Tele res = {result}')
