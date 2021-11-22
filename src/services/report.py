@@ -9,9 +9,7 @@
         -
 """
 from src.models.report import Report
-from src.producers.report import send_create_report_task, send_push_telegram_report_mess_task
-from bson import ObjectId
-from src.utils.logger import LoggerTask
+from src.producers.report import send_create_report_task
 from src.models.report import Report
 from src.enums.report import ReportEnumKey
 
@@ -19,7 +17,7 @@ class ReportService(object):
 
     @staticmethod
     def create_one(info: dict, pos: dict) -> dict:
-        send_push_telegram_report_mess_task('support_topic', info, ReportEnumKey.REPORT_SEND_MESS)
+        # send_push_telegram_report_mess_task('support_topic', info, ReportEnumKey.REPORT_SEND_MESS)
         _form_data = {
             key: value for (key, value) in info.items()
         }
