@@ -170,8 +170,9 @@ def auth_pos():
             pos_info = verify_pos_token()
 
             if not pos_info:
+                print('auth check : pos_info 1 = ', pos_info)
                 raise ExceptionRequiredAuth
-
+            print('auth check : pos_info 2 = ', pos_info)
             decorated_kwargs = {**kwargs, 'pos': pos_info}
 
             return f(*args, **decorated_kwargs)
