@@ -19,6 +19,7 @@ from flask import request
 from sentry_sdk import capture_exception
 import jwt
 import traceback
+from src.utils.logger import LoggerTask
 
 
 def sha512(data, secret_key):
@@ -170,9 +171,9 @@ def auth_pos():
             pos_info = verify_pos_token()
 
             if not pos_info:
-                print('auth check : pos_info 1 = ', pos_info)
+                LoggerTask.debug('auth check : pos_info 1 = ', pos_info)
                 raise ExceptionRequiredAuth
-            print('auth check : pos_info 2 = ', pos_info)
+            LoggerTask.debug('auth check : pos_info 2 = ', pos_info)
             decorated_kwargs = {**kwargs, 'pos': pos_info}
 
             return f(*args, **decorated_kwargs)
