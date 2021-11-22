@@ -21,10 +21,10 @@ class ReportService(object):
         _form_data = {
             key: value for (key, value) in info.items()
         }
-        _form_data['serial_number'] = pos.get('serial_number')
-        _form_data['account_id'] = pos.get('account_id')
+        _form_data['serial_number'] = pos.get('serial_number', '')
+        _form_data['account_id'] = pos.get('account_id', '')
         _form_data['terminal_id'] = pos.get('tid')
-        _form_data['pos_id'] = pos.get('pos_id')
+        _form_data['pos_id'] = pos.get('pos_id', '')
         _form_data['merchant_id'] = pos.get('merchant_id')
         # report = Report.add(_form_data)
         # global_workers => report, log, activity
