@@ -21,7 +21,7 @@ from src.decorators.auth import get_pos
 from src.schemas.report import *
 from src.utils.logger import Logger, LoggerTask
 from src.services.report import ReportService
-
+from src.exceptions.missing import ExceptionMissing
 
 @handle_response()
 @load_data(CreateReport)
@@ -31,12 +31,14 @@ def create_report(pos):
     Logger.debug('Create report - info ', data)
     Logger.debug('Create report - pos ', pos)
     if pos == {}:
-        pos_info = {
-            'merchant_id': data.get('merchant_id'),
-            'terminal_id': data.get('tid')
-        }
-        ReportService.create_one(data, pos_info)
-        return data
+        if data.get('merchant_id') and data.get('terminal_id'):
+            pos_info = {
+                'merchant_id': data.get('merchant_id'),
+                'terminal_id': data.get('terminal_id')
+            }
+            ReportService.create_one(data, pos_info)
+            return data
+        raise ExceptionMissing
 
     ReportService.create_one(data, pos)
     return data
