@@ -171,9 +171,35 @@ def auth_pos():
             pos_info = verify_pos_token()
 
             if not pos_info:
-                Logger.debug('auth check : pos_info 1 = ', pos_info)
                 raise ExceptionRequiredAuth
-            Logger.debug('auth check : pos_info 2 = ', pos_info)
+            decorated_kwargs = {**kwargs, 'pos': pos_info}
+
+            return f(*args, **decorated_kwargs)
+
+        return wrapper
+
+    return decorator
+
+def get_pos():
+    """
+        - Decorator to check and get user info from user token. Return {} if no authen
+    """
+
+    def decorator(f):
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+
+            if not request:  # Outside flask app context
+
+                decorated_kwargs = {**kwargs, 'pos': {}}
+
+                return f(*args, **decorated_kwargs)
+
+            pos_info = verify_pos_token()
+            Logger.debug('Authen check: ', pos_info)
+            if not pos_info:
+                # pos_info = {}
+                raise ExceptionRequiredAuth
             decorated_kwargs = {**kwargs, 'pos': pos_info}
 
             return f(*args, **decorated_kwargs)

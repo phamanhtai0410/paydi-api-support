@@ -17,7 +17,7 @@ from bson import ObjectId
 from flask import g
 
 from src.decorators.request import load_data
-from src.decorators.auth import auth_pos
+from src.decorators.auth import get_pos
 from src.schemas.report import *
 from src.utils.logger import Logger, LoggerTask
 from src.services.report import ReportService
@@ -25,7 +25,7 @@ from src.services.report import ReportService
 
 @handle_response()
 @load_data(CreateReport)
-@auth_pos()
+@get_pos()
 def create_report(pos):
     data = g.data
     Logger.debug('Create report - info ', data)
