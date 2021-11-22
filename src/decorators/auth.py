@@ -195,8 +195,9 @@ def get_pos():
 
                 return f(*args, **decorated_kwargs)
 
-            pos_info = verify_pos_token()
-            Logger.debug('Authen check: ', pos_info)
+            pos_info = verify_pos_token() 
+            if pos_info == None:
+                Logger.debug('Authen check: ', pos_info)
             if not pos_info:
                 # pos_info = {}
                 raise ExceptionRequiredAuth
