@@ -25,6 +25,7 @@ class ReportService(object):
         _form_data['account_id'] = pos.get('account_id')
         _form_data['terminal_id'] = pos.get('tid')
         _form_data['pos_id'] = pos.get('pos_id')
+        _form_data['merchant_id'] = pos.get('merchant_id')
         # report = Report.add(_form_data)
         # global_workers => report, log, activity
         send_create_report_task('support_topic', _form_data, ReportEnumKey.REPORT_CREATE)
