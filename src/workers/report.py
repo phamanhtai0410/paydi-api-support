@@ -18,12 +18,14 @@ class ReportWorker(object):
     def send_report_mess(data):
         message = '<strong>{}: {} </strong> ' \
                   '<pre>' \
-                  '<i>Merchant : " {} "</i> \n' \
-                  '<i>Pos ID   : " {} "</i> \n' \
-                  '<i>Message  : " {} "</i> \n' \
+                  '<i>Merchant      : " {} "</i> \n' \
+                  '<i>Account ID    : " {} "</i> \n' \
+                  '<i>Pos ID        : " {} "</i> \n' \
+                  '<i>Serial Number : " {} "</i> \n' \
+                  '<i>Message       : " {} "</i> \n' \
                   '</pre> ' \
                   '<a href="#">👉👉👉 Chi tiết</a> \n' \
-            .format("Report mới",  Constants.REPORT_TYPE_DICT.get(data.get('type')), data.get('merchant_id'), data.get('pos_id'),
+            .format("Report mới",  Constants.REPORT_TYPE_DICT.get(data.get('type')), data.get('merchant_id'), data.get('account_id'), data.get('serial_number'), data.get('pos_id'),
                     data.get('message'))
 
         result = send_telegram_message(token_id=DefaultConfig.TELE_SUPPORT_TOKEN_ID,

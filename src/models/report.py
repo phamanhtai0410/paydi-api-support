@@ -39,9 +39,10 @@ class Report(BaseMG):
     type = fields.CharField(blank=False, default='app_error')
     oid = fields.CharField(blank=False, default='app_oid')
     terminal_id = fields.CharField(blank=True)
-    serial_number = fields.CharField(blank=False)
-    account_id = fields.CharField(blank=False)
-    pos_id = fields.CharField(blank=False)
+    merchant_id = fields.CharField(blank=True)
+    serial_number = fields.CharField(blank=True)
+    account_id = fields.CharField(blank=True)
+    pos_id = fields.CharField(blank=True)
     message = fields.CharField(blank=True)
     images = fields.ListField(field=fields.CharField(), blank=True)
 

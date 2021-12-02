@@ -19,6 +19,7 @@ from flask import request
 from sentry_sdk import capture_exception
 import jwt
 import traceback
+from src.utils.logger import Logger
 
 
 def sha512(data, secret_key):
@@ -171,7 +172,35 @@ def auth_pos():
 
             if not pos_info:
                 raise ExceptionRequiredAuth
+            decorated_kwargs = {**kwargs, 'pos': pos_info}
 
+            return f(*args, **decorated_kwargs)
+
+        return wrapper
+
+    return decorator
+
+def get_pos():
+    """
+        - Decorator to check and get user info from user token. Return {} if no authen
+    """
+
+    def decorator(f):
+        @wraps(f)
+        def wrapper(*args, **kwargs):
+
+            if not request:  # Outside flask app context
+
+                decorated_kwargs = {**kwargs, 'pos': {}}
+
+                return f(*args, **decorated_kwargs)
+
+            pos_info = verify_pos_token() 
+            # if pos_info == None:
+            #     Logger.debug('Authen check: ', pos_info)
+            if not pos_info:
+                pos_info = {}
+                # raise ExceptionRequiredAuth
             decorated_kwargs = {**kwargs, 'pos': pos_info}
 
             return f(*args, **decorated_kwargs)
