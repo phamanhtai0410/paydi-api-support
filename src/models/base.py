@@ -139,8 +139,8 @@ class BaseMG(MongoModel):
     @classmethod
     def get_by_filter(cls, filter={}, options={}, with_cache=True):
         try:
-            _keys = filter.keys()
-            __option_keys = options.keys()
+            _keys = list(filter.keys())
+            __option_keys = list(options.keys())
 
             def get_db():
                 _query = [{

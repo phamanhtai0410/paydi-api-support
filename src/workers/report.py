@@ -32,6 +32,10 @@ class ReportWorker(object):
                                        chat_id=DefaultConfig.TELE_SUPPORT_CHAT_ID, message=message)
         LoggerTask.debug(f'send to Tele res = {result}')
 
+    @staticmethod
+    def create_report_in_odoo(data):
+        pass
+
     @classmethod
     def run_task(cls, message):
         """
@@ -42,6 +46,8 @@ class ReportWorker(object):
 
         # if message.get('key') == ReportEnumKey.REPORT_SEND_MESS:
         cls.send_report_mess(message.get('value'))
+
+        cls.create_report_in_odoo(message.get('value'))
 
         LoggerTask.debug(f'run_task {message}')
         pass

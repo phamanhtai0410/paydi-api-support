@@ -10,14 +10,15 @@
         -
 """
 from datetime import datetime
+from json import load
 from src.decorators.response import handle_response
 from src.exceptions import ExceptionNotFound
 
 from bson import ObjectId
-from flask import g
+from flask import g, request
 
 from src.decorators.request import load_data
-from src.decorators.auth import get_pos
+from src.decorators.auth import auth_pos, get_pos
 from src.schemas.report import *
 from src.utils.logger import Logger, LoggerTask
 from src.services.report import ReportService
@@ -43,3 +44,16 @@ def create_report(pos):
     ReportService.create_one(data, pos)
     return data
 
+@handle_response()
+@load_data(GetListReport)
+def get_list_reports_for_admin():
+    limit = request.args.get('limit', 10, type=int)
+    offset = request.args.get('offset', 0, type=int)
+    reports = ReportService.get_list_report_for_admin(limit, offset)
+    LoggerTask.debug(f'Reports list for admin ={reports}')
+    if not isinstance(reports, list):
+        reports = []
+    LoggerTask.debug(f'Get list reports for admin {reports}')
+    return GetListReportsResponse.load_response({
+        'reports': reports
+    })

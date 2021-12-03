@@ -8,12 +8,25 @@
         -
         -
 """
+from logging import Logger
 from src.models.report import Report
 from src.producers.report import send_create_report_task
 from src.models.report import Report
 from src.enums.report import ReportEnumKey
+from src.utils.logger import LoggerTask
 
 class ReportService(object):
+    @staticmethod
+    def get_list_report_for_admin(limit: int, offset: int) -> list:
+        reports = Report.get_by_filter(
+            filter={},
+            options={
+                'limit': limit,
+                'offset': offset
+            }
+        )
+        LoggerTask.debug(f'Report Service get list for admin {reports}')
+        return reports
 
     @staticmethod
     def create_one(info: dict, pos: dict) -> dict:
