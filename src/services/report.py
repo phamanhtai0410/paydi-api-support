@@ -25,8 +25,9 @@ class ReportService(object):
                 'offset': offset
             }
         )
+        total = Report.current().count()
         LoggerTask.debug(f'Report Service get list for admin {reports}')
-        return reports
+        return reports, total
 
     @staticmethod
     def create_one(info: dict, pos: dict) -> dict:

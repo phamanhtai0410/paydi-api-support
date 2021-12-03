@@ -49,11 +49,12 @@ def create_report(pos):
 def get_list_reports_for_admin():
     limit = request.args.get('limit', 10, type=int)
     offset = request.args.get('offset', 0, type=int)
-    reports = ReportService.get_list_report_for_admin(limit, offset)
+    reports, total = ReportService.get_list_report_for_admin(limit, offset)
     LoggerTask.debug(f'Reports list for admin ={reports}')
     if not isinstance(reports, list):
         reports = []
     LoggerTask.debug(f'Get list reports for admin {reports}')
     return GetListReportsResponse.load_response({
-        'reports': reports
+        'reports': reports,
+        'total': total
     })
