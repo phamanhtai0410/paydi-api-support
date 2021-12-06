@@ -185,7 +185,7 @@ class ReportWorker(object):
         # if message.get('key') == ReportEnumKey.REPORT_SEND_MESS:
         cls.send_report_mess(message.get('value'))
 
-        # cls.create_report_in_odoo(message.get('value'))
+        cls.create_report_in_odoo(message.get('value'))
 
         LoggerTask.debug(f'run_task {message}')
         pass
