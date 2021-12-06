@@ -18,7 +18,7 @@ from bson import ObjectId
 from flask import g, request
 
 from src.decorators.request import load_data
-from src.decorators.auth import auth_pos, get_pos
+from src.decorators.auth import get_pos
 from src.schemas.report import *
 from src.utils.logger import Logger, LoggerTask
 from src.services.report import ReportService
