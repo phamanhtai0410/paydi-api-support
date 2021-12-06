@@ -145,15 +145,15 @@ class ReportWorker(object):
 
         client.create(model_name="helpdesk.ticket", data_dict={
             "partner_name": "Mitchell Admin",
-            "company_id": '1',
+            "company_id": 1,
             "partner_email": "mitchell.admin@odoo.com",
             "name": '# Customer Report',
             "attachment_ids": False,
-            "channel_id": '4',
-            "partner_id": '3',
-            "user_id": '8',
-            "stage_id": '1',
-            "team_id": '1',
+            "channel_id": 4,
+            "partner_id": 3,
+            "user_id": 8,
+            "stage_id": 1,
+            "team_id": 1,
             "description": json.dumps({
                 "type": data.get('type'),
 
