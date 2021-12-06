@@ -155,7 +155,7 @@ class ReportWorker(object):
             "user_id": '8',
             "stage_id": '1',
             "team_id": '1',
-            "assigned_date": time.time(),
+            # "assigned_date": time.time(),
             "active": True,
             "description": json.dumps({
                 "type": data.get('type'),
