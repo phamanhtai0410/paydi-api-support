@@ -9,6 +9,7 @@ from src.enums.report import ReportEnumKey
 from src.constants import Constants
 import xmlrpc.client
 import json
+import time
 
 
 def myprint(data_list, title=''):
@@ -151,6 +152,11 @@ class ReportWorker(object):
             "attachment_ids": False,
             "channel_id": '4',
             "partner_id": '3',
+            "user_id": '8',
+            "stage_id": '1',
+            "team_id": '1',
+            "assigned_date": time.time(),
+            "active": True,
             "description": json.dumps({
                 "type": data.get('type'),
 
