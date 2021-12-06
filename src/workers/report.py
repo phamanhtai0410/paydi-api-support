@@ -169,7 +169,7 @@ class ReportWorker(object):
                 "images": data.get('images')
             }),
         })
-        LoggerTask(f'Create new ticket in Odoo{data}')
+        LoggerTask.debug(f'Create new ticket in Odoo{data}')
         pass
 
 
