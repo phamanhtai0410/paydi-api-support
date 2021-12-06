@@ -152,9 +152,8 @@ class ReportWorker(object):
             "channel_id": '4',
             "partner_id": '3',
             "user_id": '8',
-            # "stage_id": '1',
-            # "team_id": '1',
-            "active": True,
+            "stage_id": '1',
+            "team_id": '1',
             "description": json.dumps({
                 "type": data.get('type'),
 
