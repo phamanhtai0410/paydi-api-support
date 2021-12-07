@@ -50,7 +50,7 @@ class ReportResponse(Schema, BaseResponse):
     type = fields.String(required=True)
     oid = fields.String()
     terminal_id = fields.String(allow_none=True)
-    merchant_id = fields.String()
+    merchant_id = fields.String(allow_none=True)
     serial_number = fields.String()
     account_id = fields.String()
     pos_id = fields.String()
