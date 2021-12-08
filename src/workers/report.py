@@ -149,7 +149,7 @@ class ReportWorker(object):
             "partner_email": "mitchell.admin@odoo.com",
             "name": '# Customer Report',
             "attachment_ids": False,
-            "channel_id": 4,
+            "channel_id": 2,
             "partner_id": 3,
             "user_id": 8,
             "stage_id": 1,
