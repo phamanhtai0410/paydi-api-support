@@ -70,3 +70,4 @@ class DefaultConfig(BaseConfig):
     ODOO_DB = os.getenv('ODOO_DB')
     ODOO_USERNAME = os.getenv('ODOO_USERNAME')
     ODOO_PASSWORD = os.getenv('ODOO_PASSWORD')
+    ODOO_TICKET_TEAM_ID = os.getenv('ODOO_TICKET_TEAM_ID')

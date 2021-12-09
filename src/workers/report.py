@@ -153,7 +153,7 @@ class ReportWorker(object):
             "partner_id": 3,
             "user_id": 8,
             "stage_id": 1,
-            "team_id": 1,
+            "team_id": int(DefaultConfig.ODOO_TICKET_TEAM_ID),
             "description": json.dumps({
                 "type": data.get('type'),
 
