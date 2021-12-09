@@ -144,13 +144,13 @@ class ReportWorker(object):
                             password=DefaultConfig.ODOO_PASSWORD)
 
         client.create(model_name="helpdesk.ticket", data_dict={
-            "partner_name": "Mitchell Admin",
-            "company_id": 1,
-            "partner_email": "mitchell.admin@odoo.com",
+            "partner_name": "CS Support",
+            "partner_id": 18,
+            "partner_email": "cs.support@paydi.vn",
             "name": '# Customer Report',
             "attachment_ids": False,
             "channel_id": 2,
-            "partner_id": 3,
+            "company_id": 1,
             "user_id": 8,
             "stage_id": 1,
             "team_id": int(DefaultConfig.ODOO_TICKET_TEAM_ID),
