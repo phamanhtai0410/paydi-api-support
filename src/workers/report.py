@@ -145,7 +145,7 @@ class ReportWorker(object):
 
         client.create(model_name="helpdesk.ticket", data_dict={
             "partner_name": DefaultConfig.ODOO_TICKET_PARTNER_NAME,
-            "partner_id": int(DefaultConfig.ODOO_TICKET_PARTNER_ID),
+            "partner_id": int(DefaultConfig.ODDO_TICKET_PARTNER_ID),
             "partner_email": DefaultConfig.ODDO_TICKET_PARTNER_EMAIL,
             "name": '# Customer Report',
             "attachment_ids": False,
