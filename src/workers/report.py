@@ -167,7 +167,7 @@ class ReportWorker(object):
                             <div><strong>4. </strong>Serial Number : {data.get('serial_number')}</div> \
                             <div><strong>5. </strong>Account ID : {data.get('account_id')}</div> \
                             <div><strong>6. </strong>POS ID : {data.get('pos_id')}</div> \
-                            <div><strong>7. </strong>Message : ""{data.get('message')}""</div> \
+                            <div><strong>7. </strong>Message : {data.get('message')}</div> \
                             <div><strong>8. </strong>Images : {images}</div> "
             # json.dumps({
             #     "type": data.get('type'),
