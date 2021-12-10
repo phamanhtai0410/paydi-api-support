@@ -143,6 +143,13 @@ class ReportWorker(object):
                             username=DefaultConfig.ODOO_USERNAME,
                             password=DefaultConfig.ODOO_PASSWORD)
 
+        def get_html_images(images: list) -> str:
+            list_images_link = []
+            for i in images:
+                list_images_link.append(f'<div><a href="{i}"></a></div>')
+            return ''.join(list_images_link)
+        
+        images = get_html_images(data.get('images'))
         client.create(model_name="helpdesk.ticket", data_dict={
             "partner_name": DefaultConfig.ODOO_TICKET_PARTNER_NAME,
             "partner_id": int(DefaultConfig.ODDO_TICKET_PARTNER_ID),
@@ -161,7 +168,7 @@ class ReportWorker(object):
                             <div><strong>5. </strong>Account ID : {data.get('account_id')}</div> \
                             <div><strong>6. </strong>POS ID : {data.get('pos_id')}</div> \
                             <div><strong>7. </strong>Message : ""{data.get('message')}""</div> \
-                            <div><strong>8. </strong>Images : {''.join(['<a href="{img}"></a>' for img in data.get('images')])}</div> "
+                            <div><strong>8. </strong>Images : {images}</div> "
             # json.dumps({
             #     "type": data.get('type'),
 
