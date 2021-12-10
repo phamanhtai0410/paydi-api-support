@@ -154,23 +154,31 @@ class ReportWorker(object):
             "user_id": 8,
             "stage_id": 1,
             "team_id": int(DefaultConfig.ODOO_TICKET_TEAM_ID),
-            "description": json.dumps({
-                "type": data.get('type'),
+            "description": f"<div><strong>1. </strong>Type : {Constants.REPORT_TYPE_DICT.get(data.get('type'))}</div> \
+                            <div><strong>2. </strong>OID : {data.get('oid') if data.get('oid') != 'app_oid' else 'None'}</div> \
+                            <div><strong>3. </strong>Terminal ID : {data.get('terminal_id')}</div> \
+                            <div><strong>4. </strong>Serial Number : {data.get('serial_number')}</div> \
+                            <div><strong>5. </strong>Account ID : {data.get('account_id')}</div> \
+                            <div><strong>6. </strong>POS ID : {data.get('pos_id')}</div> \
+                            <div><strong>7. </strong>Message : ""{data.get('message')}""</div> \
+                            <div><strong>8. </strong>Images : {''.join(['<a href="{img}"></a>' for img in data.get('images')])}</div> "
+            # json.dumps({
+            #     "type": data.get('type'),
 
-                "oid": data.get('oid'),
+            #     "oid": data.get('oid'),
 
-                "terminal_id": data.get('terminal_id'),
+            #     "terminal_id": data.get('terminal_id'),
 
-                "serial_number": data.get('serial_number'),
+            #     "serial_number": data.get('serial_number'),
 
-                "account_id": data.get('account_id'),
+            #     "account_id": data.get('account_id'),
 
-                "pos_id": data.get('pos_id'),
+            #     "pos_id": data.get('pos_id'),
 
-                "message": data.get('message'),
+            #     "message": data.get('message'),
 
-                "images": data.get('images')
-            }),
+            #     "images": data.get('images')
+            # }),
         })
         LoggerTask.debug(f'Create new ticket in Odoo{data}')
         pass
