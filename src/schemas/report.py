@@ -34,8 +34,8 @@ class CreateReport(Schema):
         'validator_failed': 'input "type" is not valid !'
     })
     oid = fields.String(default='app_oid')
-    message = fields.String()
-    images = fields.List(fields.String())
+    message = fields.String(allow_none=True, missing='')
+    images = fields.List(fields.String(), allow_none=True, missing=[])
 
 ########################################################################################
 # Schema Response Data
