@@ -39,7 +39,7 @@ class Constants(object):
     REPORT_TYPE = ['app_error', 'feedback', 'app_rest', 'transaction']
     REPORT_TYPE_DICT = {
         'app_error': 'App: Báo lỗi', 
-        'feedback': 'App: Góp ý',
+        'app_feedback': 'App: Góp ý',
         'app_rest': 'App: Khác',
         'transaction': 'Lỗi transaction'
     }
