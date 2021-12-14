@@ -139,7 +139,7 @@ class ReportWorker(object):
     @staticmethod
     def create_report_in_odoo(data):
         LoggerTask.debug(f'Create new ticket in Odoo{data}')
-        
+
         client = XMLRPC_API(url=DefaultConfig.ODOO_URL,
                             db=DefaultConfig.ODOO_DB,
                             username=DefaultConfig.ODOO_USERNAME,
@@ -153,7 +153,7 @@ class ReportWorker(object):
         
         def get_company_id(odoo_contact_id: str) -> int:
             return client.read(model_name="res.partner", conditions=[('id', '=', int(odoo_contact_id))],
-                        params={'fields': ['company_id'], 'limit': 1}).get('company_id')
+                        params={'fields': ['company_id'], 'limit': 1})[0].get('company_id')
 
         if data.get('odoo_contact_id'):
             company_id = get_company_id(data.get('odoo_contact_id'))
