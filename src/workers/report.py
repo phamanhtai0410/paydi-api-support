@@ -156,9 +156,9 @@ class ReportWorker(object):
                         params={'fields': ['company_id'], 'limit': 1})[0].get('company_id')
 
         if data.get('odoo_contact_id'):
-            company_id = get_company_id(data.get('odoo_contact_id'))
+            company_id = get_company_id(data.get('odoo_contact_id'))[0]
         else:
-            company_id = ''
+            company_id = 1
 
         LoggerTask.debug(f'Create report odoo - get company id = {company_id}')
         images = get_html_images(data.get('images'))
@@ -170,8 +170,7 @@ class ReportWorker(object):
             "name": '# Customer Report',
             "attachment_ids": False,
             "channel_id": 2,
-            "company_id": 1,
-            # get_company_id(data.get('odoo_contact_id')),
+            "company_id": company_id,
             "user_id": 8,
             "stage_id": 1,
             "team_id": int(DefaultConfig.ODOO_TICKET_TEAM_ID),
