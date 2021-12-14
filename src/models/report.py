@@ -41,6 +41,7 @@ class Report(BaseMG):
     terminal_id = fields.CharField(blank=True)
     merchant_id = fields.CharField(blank=True)
     serial_number = fields.CharField(blank=True)
+    odoo_contact_id = fields.CharField(blank=True)
     account_id = fields.CharField(blank=True)
     pos_id = fields.CharField(blank=True)
     message = fields.CharField(blank=True)

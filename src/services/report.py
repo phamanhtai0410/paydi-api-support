@@ -40,5 +40,6 @@ class ReportService(object):
         _form_data['terminal_id'] = pos.get('tid')
         _form_data['pos_id'] = pos.get('pos_id', '')
         _form_data['merchant_id'] = pos.get('merchant_id')
+        _form_data['odoo_contact_id'] = pos.get('odoo_contact_id')
         send_create_report_task('support_topic', _form_data, ReportEnumKey.REPORT_CREATE)
         return {}

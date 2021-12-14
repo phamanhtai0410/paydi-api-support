@@ -149,6 +149,11 @@ class ReportWorker(object):
                 list_images_link.append(f'<div><a href="{i}">{i}</a></div>')
             return ''.join(list_images_link)
         
+        def get_company_id(odoo_contact_id: str) -> int:
+            return client.read(model_name="res.partner", conditions=[('id', '=', int(odoo_contact_id))],
+                        params={'fields': ['company_id'], 'limit': 1}).get('company_id')
+            
+        LoggerTask.debug(f'Create report odoo - get company id = {get_company_id(data.get('odoo_contact_id'))}')
         images = get_html_images(data.get('images'))
         # LoggerTask.debug(f'--- Create Odoo ticket - images: {images}')
         client.create(model_name="helpdesk.ticket", data_dict={
@@ -159,6 +164,7 @@ class ReportWorker(object):
             "attachment_ids": False,
             "channel_id": 2,
             "company_id": 1,
+            # get_company_id(data.get('odoo_contact_id')),
             "user_id": 8,
             "stage_id": 1,
             "team_id": int(DefaultConfig.ODOO_TICKET_TEAM_ID),
