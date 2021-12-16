@@ -62,5 +62,5 @@ class GetListReportsResponse(Schema, BaseResponse):
     class Meta:
         unknown: EXCLUDE
 
-    reports = fields.List(fields.Nested(ReportResponse()))
+    transactions = fields.List(fields.Nested(ReportResponse()))
     total = fields.Integer()
