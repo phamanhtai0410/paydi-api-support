@@ -36,10 +36,10 @@ class Constants(object):
     E_AUTH = 'E_AUTH'
     E_INVALID_PARAMS = 'E_INVALID_PARAMS'
 
-    REPORT_TYPE = ['app_error', 'feedback', 'app_rest', 'transaction']
+    REPORT_TYPE = ['app_error', 'app_feedback', 'app_rest', 'transaction']
     REPORT_TYPE_DICT = {
         'app_error': 'App: Báo lỗi', 
-        'feedback': 'App: Góp ý',
+        'app_feedback': 'App: Góp ý',
         'app_rest': 'App: Khác',
         'transaction': 'Lỗi transaction'
     }

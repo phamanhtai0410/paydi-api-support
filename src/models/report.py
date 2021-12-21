@@ -37,10 +37,11 @@ class Report(BaseMG):
     
     _id = fields.ObjectIdField(primary_key=True)
     type = fields.CharField(blank=False, default='app_error')
-    oid = fields.CharField(blank=False, default='app_oid')
+    oid = fields.CharField(blank=True, default='app_oid')
     terminal_id = fields.CharField(blank=True)
     merchant_id = fields.CharField(blank=True)
     serial_number = fields.CharField(blank=True)
+    odoo_contact_id = fields.CharField(blank=True)
     account_id = fields.CharField(blank=True)
     pos_id = fields.CharField(blank=True)
     message = fields.CharField(blank=True)

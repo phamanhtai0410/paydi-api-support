@@ -61,4 +61,17 @@ class DefaultConfig(BaseConfig):
     """
         - Config kafka
     """
-    KAFKA_SERVER = os.getenv('KAFKA_SERVER')
+    # KAFKA_SERVER = os.getenv('KAFKA_SERVER')
+    KAFKA_SERVER = json.loads(os.getenv('KAFKA_SERVER', default='[]'))
+
+    """
+        - Odoo calling config
+    """
+    ODOO_URL = os.getenv('ODOO_URL')
+    ODOO_DB = os.getenv('ODOO_DB')
+    ODOO_USERNAME = os.getenv('ODOO_USERNAME')
+    ODOO_PASSWORD = os.getenv('ODOO_PASSWORD')
+    ODOO_TICKET_TEAM_ID = os.getenv('ODOO_TICKET_TEAM_ID')
+    ODOO_TICKET_PARTNER_NAME = os.getenv('ODOO_TICKET_PARTNER_NAME')
+    ODDO_TICKET_PARTNER_ID = os.getenv('ODDO_TICKET_PARTNER_ID')
+    ODDO_TICKET_PARTNER_EMAIL = os.getenv('ODDO_TICKET_PARTNER_EMAIL')
