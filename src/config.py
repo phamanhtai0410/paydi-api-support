@@ -61,7 +61,8 @@ class DefaultConfig(BaseConfig):
     """
         - Config kafka
     """
-    KAFKA_SERVER = os.getenv('KAFKA_SERVER')
+    # KAFKA_SERVER = os.getenv('KAFKA_SERVER')
+    KAFKA_SERVER = json.loads(os.getenv('KAFKA_SERVER', default='[]'))
 
     """
         - Odoo calling config
