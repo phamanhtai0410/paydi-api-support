@@ -157,6 +157,7 @@ class ReportWorker(object):
 
         if data.get('odoo_contact_id'):
             company_id = get_company_id(data.get('odoo_contact_id'))[0]
+            LoggerTask.debug(f'--- Get company ID = {company_id}')
         else:
             company_id = 1
 
