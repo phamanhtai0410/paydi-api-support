@@ -168,10 +168,10 @@ class ReportWorker(object):
     def create_report_in_odoo(data):
         LoggerTask.debug(f'Create new ticket in Odoo{data}')
 
-        client = XMLRPC_API(url=DefaultConfig.ODOO_URL,
-                            db=DefaultConfig.ODOO_DB,
-                            username=DefaultConfig.ODOO_USERNAME,
-                            password=DefaultConfig.ODOO_PASSWORD)
+        client = XMLRPC_API(url=DefaultConfig.ODOO_MMS_URL,
+                            db=DefaultConfig.ODOO_MMS_DB,
+                            username=DefaultConfig.ODOO_MMS_USERNAME,
+                            password=DefaultConfig.ODOO_MMS_PASSWORD)
 
         def get_html_images(images: list) -> str:
             list_images_link = []
