@@ -120,17 +120,45 @@ class ReportWorker(object):
 
     @staticmethod
     def send_report_mess(data):
-        message = '<strong>{}: {} </strong> ' \
-                  '<pre>' \
-                  '<i>Merchant      : " {} "</i> \n' \
-                  '<i>Account ID    : " {} "</i> \n' \
-                  '<i>Pos ID        : " {} "</i> \n' \
-                  '<i>Serial Number : " {} "</i> \n' \
-                  '<i>Message       : " {} "</i> \n' \
-                  '</pre> ' \
-                  '<a href="#">👉👉👉 Chi tiết</a> \n' \
-            .format("Report mới",  Constants.REPORT_TYPE_DICT.get(data.get('type')), data.get('merchant_id'), data.get('account_id'), data.get('serial_number'), data.get('pos_id'),
-                    data.get('message'))
+        if(data.get('type') == 'transaction'):
+            message = '<strong>{}: {} #{} </strong> ' \
+                    '<pre>' \
+                    '<i>Odoo Contact ID      : " {} "</i> \n' \
+                    '<i>Account ID           : " {} "</i> \n' \
+                    '<i>Serial Number        : " {} "</i> \n' \
+                    '<i>Device ID            : " {} "</i> \n' \
+                    '<i>Pos ID               : " {} "</i> \n' \
+                    '<i>Message              : " {} "</i> \n' \
+                    '</pre> ' \
+                    '<a href="#">👉👉👉 Chi tiết</a> \n' \
+                .format("Report mới",
+                        Constants.REPORT_TYPE_DICT.get(data.get('type')),
+                        data.get('oid'),
+                        data.get('odoo_contact_id'),
+                        data.get('account_id'),
+                        data.get('serial_number'),
+                        data.get('device_id'),
+                        data.get('pos_id'),
+                        data.get('message'))
+        else:    
+            message = '<strong>{}: {} </strong> ' \
+                    '<pre>' \
+                    '<i>Odoo Contact ID      : " {} "</i> \n' \
+                    '<i>Account ID           : " {} "</i> \n' \
+                    '<i>Serial Number        : " {} "</i> \n' \
+                    '<i>Device ID            : " {} "</i> \n' \
+                    '<i>Pos ID               : " {} "</i> \n' \
+                    '<i>Message              : " {} "</i> \n' \
+                    '</pre> ' \
+                    '<a href="#">👉👉👉 Chi tiết</a> \n' \
+                .format("Report mới",
+                        Constants.REPORT_TYPE_DICT.get(data.get('type')),
+                        data.get('odoo_contact_id'),
+                        data.get('account_id'),
+                        data.get('serial_number'),
+                        data.get('device_id'),
+                        data.get('pos_id'),
+                        data.get('message'))
 
         result = send_telegram_message(token_id=DefaultConfig.TELE_SUPPORT_TOKEN_ID,
                                        chat_id=DefaultConfig.TELE_SUPPORT_CHAT_ID, message=message)
@@ -164,6 +192,7 @@ class ReportWorker(object):
         LoggerTask.debug(f'Create report odoo - get company id = {company_id}')
         images = get_html_images(data.get('images'))
         # LoggerTask.debug(f'--- Create Odoo ticket - images: {images}')
+        
         client.create(model_name="helpdesk.ticket", data_dict={
             "partner_name": DefaultConfig.ODOO_TICKET_PARTNER_NAME,
             "partner_id": int(DefaultConfig.ODDO_TICKET_PARTNER_ID),
