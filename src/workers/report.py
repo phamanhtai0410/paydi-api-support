@@ -212,23 +212,6 @@ class ReportWorker(object):
                             <div><strong>6. </strong>POS ID : {data.get('pos_id')}</div> \
                             <div><strong>7. </strong>Message : {data.get('message')}</div> \
                             <div><strong>8. </strong>Images : {images}</div> "
-            # json.dumps({
-            #     "type": data.get('type'),
-
-            #     "oid": data.get('oid'),
-
-            #     "terminal_id": data.get('terminal_id'),
-
-            #     "serial_number": data.get('serial_number'),
-
-            #     "account_id": data.get('account_id'),
-
-            #     "pos_id": data.get('pos_id'),
-
-            #     "message": data.get('message'),
-
-            #     "images": data.get('images')
-            # }),
         })
         
         pass
