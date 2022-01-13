@@ -23,6 +23,7 @@ from src.schemas.report import *
 from src.utils.logger import Logger, LoggerTask
 from src.services.report import ReportService
 from src.exceptions.missing import ExceptionMissing
+# ------------------------------
 
 @handle_response()
 @load_data(CreateReport)
@@ -40,8 +41,8 @@ def create_report(pos):
             ReportService.create_one(data, pos_info)
             return data
         raise ExceptionMissing
-
-    ReportService.create_one(data, pos)
+    
+    ReportService.create_one(data, pos)    
     return data
 
 @handle_response()
