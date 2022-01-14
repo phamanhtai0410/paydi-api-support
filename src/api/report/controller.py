@@ -32,17 +32,16 @@ def create_report(pos):
     data = g.data
     Logger.debug('Create report - info ', data)
     Logger.debug('Create report - pos ', pos)
-    if pos == {}:
-        if data.get('merchant_id') and data.get('terminal_id'):
-            pos_info = {
-                'merchant_id': data.get('merchant_id'),
-                'tid': data.get('terminal_id')
-            }
-            ReportService.create_one(data, pos_info)
-            return data
-        raise ExceptionMissing
     
-    ReportService.create_one(data, pos)    
+    create_data = {
+        **data,
+        **pos
+    }
+    Logger.debug('Create report - create_data ', create_data) 
+    if not create_data.get('serial_number') or not create_data.get('company_code'):
+        raise ExceptionMissing
+        
+    ReportService.create_one(create_data)    
     return data
 
 @handle_response()
