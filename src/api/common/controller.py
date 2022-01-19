@@ -10,29 +10,28 @@
         -
 """
 from datetime import datetime
-from src.decorators.response import handle_response
-from src.exceptions import ExceptionNotFound
+from paydi_lib.decorators import handle_response, load_data
+from paydi_lib.exceptions import NotFound
 
 from bson import ObjectId
 from flask import g
 
-from src.decorators.request import load_data
 from src.schemas import Example
 from src.schemas.example import ExampleResponse
-from src.utils.logger import Logger
+from paydi_lib.logger import Logger
 
 
-@handle_response()
+@handle_response(schema=ExampleResponse)
 @load_data(Example)
 def cl_health_check():
     data = g.data
     Logger.debug("call health_check", data)
 
     if data:
-        raise ExceptionNotFound
+        raise NotFound
 
-    return ExampleResponse.load_response({
+    return {
         '_id': ObjectId(),
         'created_time': datetime.utcnow()
-    })
+    }
 

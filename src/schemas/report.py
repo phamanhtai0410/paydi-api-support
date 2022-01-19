@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-
 # File: report.py
 # Created at 16/11/2021
 """
@@ -10,21 +9,22 @@
         -
 """
 from os import terminal_size
-from marshmallow import Schema, fields, ValidationError, INCLUDE, EXCLUDE, pre_load
+from marshmallow import Schema, fields, INCLUDE, EXCLUDE
 
-from src.schemas.base import BaseResponse, BaseQuery
-from src.utils.format import is_oid, id_response, is_report_type, is_report_type
+from paydi_lib.schema import BaseResponse
+from src.utils.format import is_report_type
 
 
 ########################################################################
 # Schema Request Data
 ########################################################################
-class GetListReport(Schema, BaseQuery):
+class GetListReport(Schema):
     class Meta:
         unknown = INCLUDE
 
     limit = fields.Int(missing=0)
     offset = fields.Int(missing=0)
+
 
 class CreateReport(Schema):
     class Meta:
@@ -36,6 +36,7 @@ class CreateReport(Schema):
     oid = fields.String(default='app_oid')
     message = fields.String(allow_none=True, missing='')
     images = fields.List(fields.String(), allow_none=True, missing=[])
+
 
 ########################################################################################
 # Schema Response Data

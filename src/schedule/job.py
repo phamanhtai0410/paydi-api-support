@@ -12,7 +12,7 @@ import traceback
 
 import sentry_sdk
 
-from src.utils.logger import Logger
+from paydi_lib.logger import Logger
 
 
 def name_job():

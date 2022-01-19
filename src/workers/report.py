@@ -1,15 +1,9 @@
-from bson.objectid import ObjectId
-from src.enums import MethodEnum
-from src.utils.datetime import get_current_time
-from src.utils.logger import LoggerTask
+from paydi_lib.logger import LoggerTask
 from src.models.report import Report
 from src.utils.send__telegram_mess import *
 from src.config import DefaultConfig
-from src.enums.report import ReportEnumKey
 from src.constants import Constants
 import xmlrpc.client
-import json
-import time
 
 
 def myprint(data_list, title=''):
@@ -18,6 +12,7 @@ def myprint(data_list, title=''):
     for line in data_list:
         print('-', line)
     pass
+
 
 class XMLRPC_API():
     def __init__(self, url, db, username='admin', password='admin'):
@@ -32,13 +27,13 @@ class XMLRPC_API():
 
     # get fields names of the model
     def get_fields(self, model_name, required=False):
-        data = self.models.execute_kw(self.db, 
-            self.uid, 
-            self.password, 
-            model_name, 
-            'fields_get',
-            [], {'attributes': ['string', 'type', 'required', 'readonly']})
-        
+        data = self.models.execute_kw(self.db,
+                                      self.uid,
+                                      self.password,
+                                      model_name,
+                                      'fields_get',
+                                      [], {'attributes': ['string', 'type', 'required', 'readonly']})
+
         if required:
             key_list = list(data.keys())
             for k in key_list:
@@ -49,11 +44,12 @@ class XMLRPC_API():
 
     def search(self, model_name, conditions=[()]):
         return self.models.execute_kw(self.db, self.uid, self.password,
-            model_name, 
-            'search',
-            [conditions])  
+                                      model_name,
+                                      'search',
+                                      [conditions])
 
-    # Create
+        # Create
+
     def create(self, model_name, data_dict):
         """
         Eg.
@@ -72,12 +68,13 @@ class XMLRPC_API():
             params: {'fields': ['name', 'country_id', 'comment'], 'limit': 5}
         """
         return self.models.execute_kw(self.db, self.uid, self.password,
-            model_name, 
-            'search_read',
-            [conditions],
-            params)       
-    
-    # Update
+                                      model_name,
+                                      'search_read',
+                                      [conditions],
+                                      params)
+
+        # Update
+
     def update(self, model_name, id_list, new_data_dict):
         """
         Eg.
@@ -85,12 +82,12 @@ class XMLRPC_API():
             id_list: [7]
             new_data_dict: { 'name': "Newer partner", 'age': 27 }
         """
-        self.models.execute_kw(self.db, 
-            self.uid, 
-            self.password, 
-            model_name, 
-            'write', 
-            [id_list, new_data_dict])
+        self.models.execute_kw(self.db,
+                               self.uid,
+                               self.password,
+                               model_name,
+                               'write',
+                               [id_list, new_data_dict])
 
     # Delete
     def delete(self, model_name, id_list):
@@ -111,7 +108,6 @@ class XMLRPC_API():
         return self.models.execute_kw(self.db, self.uid, self.password, model_name, method, param1, param2)
 
 
-
 class ReportWorker(object):
 
     @staticmethod
@@ -120,17 +116,17 @@ class ReportWorker(object):
 
     @staticmethod
     def send_report_mess(data):
-        if(data.get('type') == 'transaction'):
+        if (data.get('type') == 'transaction'):
             message = '<strong>{}: {} #{} </strong> ' \
-                    '<pre>' \
-                    '<i>Odoo Contact ID      : " {} "</i> \n' \
-                    '<i>Account ID           : " {} "</i> \n' \
-                    '<i>Serial Number        : " {} "</i> \n' \
-                    '<i>Device ID            : " {} "</i> \n' \
-                    '<i>Pos ID               : " {} "</i> \n' \
-                    '<i>Message              : " {} "</i> \n' \
-                    '</pre> ' \
-                    '<a href="#">👉👉👉 Chi tiết</a> \n' \
+                      '<pre>' \
+                      '<i>Odoo Contact ID      : " {} "</i> \n' \
+                      '<i>Account ID           : " {} "</i> \n' \
+                      '<i>Serial Number        : " {} "</i> \n' \
+                      '<i>Device ID            : " {} "</i> \n' \
+                      '<i>Pos ID               : " {} "</i> \n' \
+                      '<i>Message              : " {} "</i> \n' \
+                      '</pre> ' \
+                      '<a href="#">👉👉👉 Chi tiết</a> \n' \
                 .format("Report mới",
                         Constants.REPORT_TYPE_DICT.get(data.get('type')),
                         data.get('oid'),
@@ -140,17 +136,17 @@ class ReportWorker(object):
                         data.get('device_id'),
                         data.get('pos_id'),
                         data.get('message'))
-        else:    
+        else:
             message = '<strong>{}: {} </strong> ' \
-                    '<pre>' \
-                    '<i>Odoo Contact ID      : " {} "</i> \n' \
-                    '<i>Account ID           : " {} "</i> \n' \
-                    '<i>Serial Number        : " {} "</i> \n' \
-                    '<i>Device ID            : " {} "</i> \n' \
-                    '<i>Pos ID               : " {} "</i> \n' \
-                    '<i>Message              : " {} "</i> \n' \
-                    '</pre> ' \
-                    '<a href="#">👉👉👉 Chi tiết</a> \n' \
+                      '<pre>' \
+                      '<i>Odoo Contact ID      : " {} "</i> \n' \
+                      '<i>Account ID           : " {} "</i> \n' \
+                      '<i>Serial Number        : " {} "</i> \n' \
+                      '<i>Device ID            : " {} "</i> \n' \
+                      '<i>Pos ID               : " {} "</i> \n' \
+                      '<i>Message              : " {} "</i> \n' \
+                      '</pre> ' \
+                      '<a href="#">👉👉👉 Chi tiết</a> \n' \
                 .format("Report mới",
                         Constants.REPORT_TYPE_DICT.get(data.get('type')),
                         data.get('odoo_contact_id'),
@@ -178,10 +174,10 @@ class ReportWorker(object):
             for i in images:
                 list_images_link.append(f'<div><a href="{i}">{i}</a></div>')
             return ''.join(list_images_link)
-        
+
         def get_company_id(odoo_contact_id: str) -> int:
             return client.read(model_name="res.partner", conditions=[('id', '=', int(odoo_contact_id))],
-                        params={'fields': ['company_id'], 'limit': 1})[0].get('company_id')
+                               params={'fields': ['company_id'], 'limit': 1})[0].get('company_id')
 
         if data.get('odoo_contact_id'):
             company_id = get_company_id(data.get('odoo_contact_id'))[0]
@@ -192,7 +188,7 @@ class ReportWorker(object):
         LoggerTask.debug(f'Create report odoo - get company id = {company_id}')
         images = get_html_images(data.get('images'))
         # LoggerTask.debug(f'--- Create Odoo ticket - images: {images}')
-        
+
         client.create(model_name="helpdesk.ticket", data_dict={
             "partner_name": DefaultConfig.ODOO_TICKET_PARTNER_NAME,
             "partner_id": int(DefaultConfig.ODDO_TICKET_PARTNER_ID),
@@ -213,10 +209,8 @@ class ReportWorker(object):
                             <div><strong>7. </strong>Message : {data.get('message')}</div> \
                             <div><strong>8. </strong>Images : {images}</div> "
         })
-        
+
         pass
-
-
 
     @classmethod
     def run_task(cls, message):
