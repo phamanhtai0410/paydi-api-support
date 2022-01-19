@@ -25,8 +25,7 @@ from jsonschema import ValidationError
 # For import *
 __all__ = ['create_app']
 
-from .schedule import name_job
-from .utils.logger import Logger
+from paydi_lib.logger import Logger
 
 DEFAULT_BLUEPRINTS = rest_app
 

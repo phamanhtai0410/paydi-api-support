@@ -1,19 +1,17 @@
-
-# File: report.py	
+# File: report.py
 # Created at 16/11/2021
 """
    Description: 
         -
         -
 """
-from src.exceptions.handler import handle_exception
-from src.producers.base import send_message_to_topic
-
+from paydi_lib.exceptions import handle_exception
+from paydi_lib.worker import send_worker
 
 
 @handle_exception()
 def send_create_report_task(topic: str, value: dict, key: str) -> None:
-    send_message_to_topic(topic, {
+    send_worker(topic, {
         'action': 'POST',
         'value': value,
         'key': key

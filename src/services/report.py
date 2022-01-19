@@ -8,12 +8,10 @@
         -
         -
 """
-from logging import Logger
-from src.models.report import Report
 from src.producers.report import send_create_report_task
 from src.models.report import Report
 from src.enums.report import ReportEnumKey
-from src.utils.logger import LoggerTask
+from paydi_lib.logger import LoggerTask
 
 class ReportService(object):
     @staticmethod

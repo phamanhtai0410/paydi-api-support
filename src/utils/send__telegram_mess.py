@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-
 # File: send_mess_to_telegram.py
 # Created at 16/11/2021
 """
@@ -9,17 +8,11 @@
         -
         -
 """
-import json
-import logging
-import sys
-import traceback
-from datetime import datetime
 
 from sentry_sdk import capture_exception
 
-from src.utils.format import json_encode_hook
-from inspect import getframeinfo, stack
 import requests
+
 
 def send_telegram_message(token_id, chat_id, message):
     try:
@@ -32,4 +25,3 @@ def send_telegram_message(token_id, chat_id, message):
                              verify=False).content
     except Exception as e:
         capture_exception(e)
-

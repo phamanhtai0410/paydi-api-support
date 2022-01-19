@@ -11,7 +11,7 @@
 from pymodm import fields
 
 from src.enums.transaction import TransactionStatusEnum
-from src.models.base import BaseMG
+from paydi_lib.model import BaseMG
 
 
 class TransactionModel(BaseMG):

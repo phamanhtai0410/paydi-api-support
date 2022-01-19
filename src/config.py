@@ -12,6 +12,7 @@
 import os
 import json
 from dotenv import load_dotenv
+from paydi_lib.config import init
 
 load_dotenv()
 
@@ -76,3 +77,6 @@ class DefaultConfig(BaseConfig):
     ODOO_TICKET_PARTNER_NAME = os.getenv('ODOO_TICKET_PARTNER_NAME')
     ODDO_TICKET_PARTNER_ID = os.getenv('ODDO_TICKET_PARTNER_ID')
     ODDO_TICKET_PARTNER_EMAIL = os.getenv('ODDO_TICKET_PARTNER_EMAIL')
+
+
+init(config=DefaultConfig)

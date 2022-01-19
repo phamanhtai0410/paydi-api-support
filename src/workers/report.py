@@ -1,17 +1,12 @@
-from bson.objectid import ObjectId
-from src.enums import MethodEnum
-from src.utils.datetime import get_current_time
-from src.utils.logger import LoggerTask
+from paydi_lib.logger import LoggerTask
 from src.models.report import Report
 from src.models.crm import CRM
 from src.utils.logger import Logger
 from src.utils.send__telegram_mess import *
 from src.config import DefaultConfig
-from src.enums.report import ReportEnumKey
 from src.constants import Constants
 import xmlrpc.client
 from src.utils.request import make_request
-
 
 class ReportWorker(object):
 
@@ -21,17 +16,17 @@ class ReportWorker(object):
 
     @staticmethod
     def send_report_mess(data):
-        if(data.get('type') == 'transaction'):
+        if (data.get('type') == 'transaction'):
             message = '<strong>{}: {} #{} </strong> ' \
-                    '<pre>' \
-                    '<i>Odoo Contact ID      : " {} "</i> \n' \
-                    '<i>Account ID           : " {} "</i> \n' \
-                    '<i>Serial Number        : " {} "</i> \n' \
-                    '<i>Device ID            : " {} "</i> \n' \
-                    '<i>Pos ID               : " {} "</i> \n' \
-                    '<i>Message              : " {} "</i> \n' \
-                    '</pre> ' \
-                    '<a href="#">👉👉👉 Chi tiết</a> \n' \
+                      '<pre>' \
+                      '<i>Odoo Contact ID      : " {} "</i> \n' \
+                      '<i>Account ID           : " {} "</i> \n' \
+                      '<i>Serial Number        : " {} "</i> \n' \
+                      '<i>Device ID            : " {} "</i> \n' \
+                      '<i>Pos ID               : " {} "</i> \n' \
+                      '<i>Message              : " {} "</i> \n' \
+                      '</pre> ' \
+                      '<a href="#">👉👉👉 Chi tiết</a> \n' \
                 .format("Report mới",
                         Constants.REPORT_TYPE_DICT.get(data.get('type')),
                         data.get('oid'),
@@ -41,17 +36,17 @@ class ReportWorker(object):
                         data.get('device_id'),
                         data.get('pos_id'),
                         data.get('message'))
-        else:    
+        else:
             message = '<strong>{}: {} </strong> ' \
-                    '<pre>' \
-                    '<i>Odoo Contact ID      : " {} "</i> \n' \
-                    '<i>Account ID           : " {} "</i> \n' \
-                    '<i>Serial Number        : " {} "</i> \n' \
-                    '<i>Device ID            : " {} "</i> \n' \
-                    '<i>Pos ID               : " {} "</i> \n' \
-                    '<i>Message              : " {} "</i> \n' \
-                    '</pre> ' \
-                    '<a href="#">👉👉👉 Chi tiết</a> \n' \
+                      '<pre>' \
+                      '<i>Odoo Contact ID      : " {} "</i> \n' \
+                      '<i>Account ID           : " {} "</i> \n' \
+                      '<i>Serial Number        : " {} "</i> \n' \
+                      '<i>Device ID            : " {} "</i> \n' \
+                      '<i>Pos ID               : " {} "</i> \n' \
+                      '<i>Message              : " {} "</i> \n' \
+                      '</pre> ' \
+                      '<a href="#">👉👉👉 Chi tiết</a> \n' \
                 .format("Report mới",
                         Constants.REPORT_TYPE_DICT.get(data.get('type')),
                         data.get('odoo_contact_id'),
@@ -108,6 +103,7 @@ class ReportWorker(object):
         pass
 
 
+        pass
 
     @classmethod
     def run_task(cls, message):
