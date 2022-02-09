@@ -9,7 +9,6 @@
         -
 """
 
-from src.config import DefaultConfig
 from paydi_lib.worker import Worker
 
 from src.workers.report import ReportWorker
@@ -23,4 +22,3 @@ worker_config = {
     'support_topic.report_workers': ReportWorker
 }
 
-app = Worker(config=worker_config, app_config=DefaultConfig).run()

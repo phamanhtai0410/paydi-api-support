@@ -1,0 +1,3 @@
+[submodule "paydi-lib"]
+	path = paydi-lib
+	url = https://gitlab.rinznetwork.com/paydi/paydi-lib.git

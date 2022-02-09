@@ -18,7 +18,6 @@ RUN apk upgrade -U \
 COPY requirements.txt /
 RUN pip --no-cache-dir install --upgrade pip setuptools
 RUN pip --no-cache-dir install -r requirements.txt && mkdir -p /var/log/apps
-RUN pip --no-cache-dir install --upgrade --force-reinstall git+https://gitlab-ci-token:FgQxcXZv-qkVejoDevDX@gitlab.rinznetwork.com/paydi/paydi-lib.git@develop/0.0.1-beta#egg=paydi_lib
 
 COPY conf/uwsgi.ini /etc/uwsgi/
 COPY conf/supervisor/ /etc/supervisor.d/
