@@ -22,3 +22,4 @@ worker_config = {
     'support_topic.report_workers': ReportWorker
 }
 
+app = Worker(worker_config).run()
