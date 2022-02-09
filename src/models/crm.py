@@ -11,7 +11,7 @@
 """
 
 from pymodm import fields
-from src.models.base import BaseMG
+from paydi_lib.model import BaseMG
 
 SIZE = 10000
 
