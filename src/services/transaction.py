@@ -8,12 +8,9 @@
         -
         -
 """
-from logging import Logger
-from src.models.report import Report
-from src.producers.report import send_create_report_task
-from src.models.transaction import TransactionModel, ErrorTransactionModel, CardTransactionModel, PreAuthTransactionModel
-from src.enums.transaction import TransactionStatusEnum, TransactionTopicKeyEnum
-from src.utils.logger import LoggerTask
+from src.models.transaction import TransactionModel, ErrorTransactionModel, CardTransactionModel, \
+    PreAuthTransactionModel
+
 
 class TransactionService(object):
     @staticmethod
@@ -27,7 +24,6 @@ class TransactionService(object):
         )
         total = TransactionModel.current().count()
         return transactions, total
-    
 
     @staticmethod
     def get_list_error_transactions(limit: int, offset: int) -> list:
@@ -64,4 +60,3 @@ class TransactionService(object):
         )
         total = PreAuthTransactionModel.current().count()
         return transactions, total
-

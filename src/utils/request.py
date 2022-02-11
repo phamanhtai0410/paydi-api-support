@@ -1,27 +1,14 @@
-# -*- coding: utf-8 -*-
-
-
-# File: utils.py
-# Created at 03/11/2021
-"""
-   Description:
-        -
-        -
-"""
+from src.config import DefaultConfig
 import json
 import traceback
 
 import requests
 import sentry_sdk
 
-from src.config import DefaultConfig
-
-
-def use_request_inside(url, method, body={}, params={}):
+def make_request(url, method, body={}, params={}):
     try:
         headers = {
             'Content-Type': 'application/json',
-            'apiKey': DefaultConfig.INSIDE_APIKEY
         }
         _data = json.dumps(body)
         response = requests.request(method=method,

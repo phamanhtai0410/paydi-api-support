@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 
-
 # File: report.py
 # Created at 16/11/2021
 """
@@ -9,24 +8,20 @@
         -
         -
 """
-from os import terminal_size
-from marshmallow import Schema, fields, ValidationError, INCLUDE, EXCLUDE, pre_load
-from marshmallow.utils import _Missing
+from marshmallow import Schema, fields, INCLUDE, EXCLUDE, pre_load
 
-from src.schemas.base import BaseResponse, BaseQuery, Convert
-from src.utils.format import is_oid, id_response, is_report_type, is_report_type
+from paydi_lib.schema import BaseResponse, Convert
 
 
 ########################################################################
 # Schema Request Data
 ########################################################################
-class GetListTransactions(Schema, BaseQuery):
+class GetListTransactions(Schema):
     class Meta:
         unknown = INCLUDE
 
     limit = fields.Int(missing=0)
     offset = fields.Int(missing=0)
-
 
 
 ########################################################################################
@@ -60,19 +55,18 @@ class GetListTransactionsResponse(Schema, BaseResponse):
     transactions = fields.List(fields.Nested(TransactionResponse()))
     total = fields.Integer()
 
-#--------------------------------------------------------------------------------------#
+
+# --------------------------------------------------------------------------------------#
 
 class ErrorTransactionResponse(Schema, BaseResponse):
     class Meta:
         unknown = EXCLUDE
-    
     _id = fields.String(required=True)
     created_time = fields.Float(required=True)
 
     odoo_contact_id = fields.String(allow_none=True)
     account_id = fields.String(required=True)
     pos_id = fields.String(required=True)
-
 
     """
         - Request data app
@@ -109,12 +103,12 @@ class GetListErrorTransactionsResponse(Schema, BaseResponse):
     transactions = fields.List(fields.Nested(ErrorTransactionResponse()))
     total = fields.Integer()
 
-#--------------------------------------------------------------------------------------#
+
+# --------------------------------------------------------------------------------------#
 
 class CardTransactionResponse(Schema, BaseResponse):
     class Meta:
         unknown = EXCLUDE
-    
     _id = fields.String(required=True)
     created_time = fields.Float(required=True)
 
@@ -192,7 +186,8 @@ class GetListCardTransactionsResponse(Schema, BaseResponse):
     transactions = fields.List(fields.Nested(CardTransactionResponse()))
     total = fields.Integer()
 
-#--------------------------------------------------------------------------------------#
+
+# --------------------------------------------------------------------------------------#
 
 class PreAuthTransactionResponse(Schema, BaseResponse):
     class Meta:
@@ -269,7 +264,6 @@ class PreAuthTransactionResponse(Schema, BaseResponse):
     complete_data = fields.Dict(allow_none=True, default={})
 
 
-
 class GetListPreAuthTransactionsResponse(Schema, BaseResponse):
     class Meta:
         unknown = EXCLUDE
@@ -277,4 +271,4 @@ class GetListPreAuthTransactionsResponse(Schema, BaseResponse):
     transactions = fields.List(fields.Nested(PreAuthTransactionResponse()))
     total = fields.Integer()
 
-#--------------------------------------------------------------------------------------#
+# --------------------------------------------------------------------------------------#
