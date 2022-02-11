@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
+
 # File: report.py
 # Created at 16/11/2021
 """
@@ -9,11 +10,21 @@
         -
 """
 
+from collections import defaultdict
+import json
+import traceback
+from datetime import datetime
+
+import sentry_sdk
+from bson import ObjectId
 from pymodm import fields
-from paydi_lib.model import BaseMG
+from sentry_sdk import capture_exception
+from src.decorators.cache import cache_id, cache_filter
+from src.utils.datetime import get_current_time
+from src.utils.validators import is_oid
+from src.models.base import BaseMG
 
 SIZE = 10000
-
 
 class Report(BaseMG):
     """
@@ -23,7 +34,7 @@ class Report(BaseMG):
     class Meta:
         collection_name = 'paydi_report'
         final = True
-
+    
     _id = fields.ObjectIdField(primary_key=True)
     type = fields.CharField(blank=False, default='app_error')
     oid = fields.CharField(blank=True, default='app_oid')
@@ -35,3 +46,7 @@ class Report(BaseMG):
     pos_id = fields.CharField(blank=True)
     message = fields.CharField(blank=True)
     images = fields.ListField(field=fields.CharField(), blank=True)
+
+
+
+    

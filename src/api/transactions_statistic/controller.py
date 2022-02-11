@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
+
 # File: controller.py
 # Created at 16/11/2021
 """
@@ -8,33 +9,39 @@
         -
         -
 """
-from paydi_lib.decorators import handle_response
+from datetime import datetime
+from json import load
+from src.decorators.response import handle_response
+from src.exceptions import ExceptionNotFound
 
+from bson import ObjectId
 from flask import g, request
 
-from src.schemas.transactions_statistic import GetListErrorTransactionsResponse, \
-    GetListCardTransactionsResponse, GetListPreAuthTransactionsResponse, GetListTransactionsResponse
-from paydi_lib.logger import Logger
+from src.decorators.request import load_data
+from src.decorators.auth import get_pos
+from src.schemas.transactions_statistic import GetListTransactions, GetListErrorTransactionsResponse, GetListCardTransactionsResponse, GetListPreAuthTransactionsResponse, GetListTransactionsResponse
+from src.utils.logger import Logger, LoggerTask
 from src.services.transaction import TransactionService
+from src.exceptions.missing import ExceptionMissing
 
 
-@handle_response(schema=GetListTransactionsResponse)
+@handle_response()
 def get_list_transactions():
     limit = request.args.get('limit', 10, type=int)
     offset = request.args.get('offset', 0, type=int)
-
+    
     transactions, total = TransactionService.get_list_transactions(limit, offset)
     Logger.debug(f'List transactions <1> = {transactions}')
     if not isinstance(transactions, list):
         transactions = []
 
-    return {
+
+    return GetListTransactionsResponse.load_response({
         'transactions': transactions,
         'total': total
-    }
+    })
 
-
-@handle_response(schema=GetListErrorTransactionsResponse)
+@handle_response()
 def get_list_error_transactions():
     limit = request.args.get('limit', 10, type=int)
     offset = request.args.get('offset', 0, type=int)
@@ -44,13 +51,13 @@ def get_list_error_transactions():
     if not isinstance(transactions, list):
         transactions = []
 
-    return {
+
+    return GetListErrorTransactionsResponse.load_response({
         'transactions': transactions,
         'total': total
-    }
+    })
 
-
-@handle_response(schema=GetListCardTransactionsResponse)
+@handle_response()
 def get_list_card_transactions():
     limit = request.args.get('limit', 10, type=int)
     offset = request.args.get('offset', 0, type=int)
@@ -60,13 +67,13 @@ def get_list_card_transactions():
     if not isinstance(transactions, list):
         transactions = []
 
-    return {
+
+    return GetListCardTransactionsResponse.load_response({
         'transactions': transactions,
         'total': total
-    }
+    })
 
-
-@handle_response(schema=GetListPreAuthTransactionsResponse)
+@handle_response()
 def get_list_pre_auth_transactions():
     limit = request.args.get('limit', 10, type=int)
     offset = request.args.get('offset', 0, type=int)
@@ -76,7 +83,8 @@ def get_list_pre_auth_transactions():
     if not isinstance(transactions, list):
         transactions = []
 
-    return {
+
+    return GetListPreAuthTransactionsResponse.load_response({
         'transactions': transactions,
         'total': total
-    }
+    })

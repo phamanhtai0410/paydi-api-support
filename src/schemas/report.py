@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 
+
 # File: report.py
 # Created at 16/11/2021
 """
@@ -9,16 +10,16 @@
         -
 """
 from os import terminal_size
-from marshmallow import Schema, fields, INCLUDE, EXCLUDE
+from marshmallow import Schema, fields, ValidationError, INCLUDE, EXCLUDE, pre_load
 
-from paydi_lib.schema import BaseResponse
-from src.utils.format import is_report_type
+from src.schemas.base import BaseResponse, BaseQuery
+from src.utils.format import is_oid, id_response, is_report_type, is_report_type
 
 
 ########################################################################
 # Schema Request Data
 ########################################################################
-class GetListReport(Schema):
+class GetListReport(Schema, BaseQuery):
     class Meta:
         unknown = INCLUDE
 
@@ -61,5 +62,5 @@ class GetListReportsResponse(Schema, BaseResponse):
     class Meta:
         unknown: EXCLUDE
 
-    reports = fields.List(fields.Nested(ReportResponse()))
+    transactions = fields.List(fields.Nested(ReportResponse()))
     total = fields.Integer()

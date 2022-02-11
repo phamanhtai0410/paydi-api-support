@@ -8,13 +8,13 @@
         -
         -
 """
-from marshmallow import Schema, fields, INCLUDE, EXCLUDE
+from marshmallow import Schema, fields, ValidationError, INCLUDE, EXCLUDE, pre_load
 
-from paydi_lib.schema import BaseResponse
-from paydi_lib.util import is_oid
+from src.schemas.base import BaseResponse, BaseQuery
+from src.utils.format import is_oid, id_response
 
 
-class Example(Schema):
+class Example(Schema, BaseQuery):
     class Meta:
         unknown = INCLUDE
 
