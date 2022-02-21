@@ -110,11 +110,11 @@ class ReportWorker(object):
         """
             - The function handle
         """
-        cls.create_report(message.get('value'))
+        # cls.create_report(message.get('value'))
 
-        cls.send_report_mess(message.get('value'))
+        # cls.send_report_mess(message.get('value'))
 
-        cls.create_report_in_odoo(message.get('value'))
+        # cls.create_report_in_odoo(message.get('value'))
 
         LoggerTask.debug(f'run_task {message}')
         pass
