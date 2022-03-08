@@ -68,6 +68,8 @@ class ReportWorker(object):
         crm_url = CRM.get_one(filter={
             'company_code': data.get('company_code')
         }).get('crm_url')
+        if not crm_url:
+            return None
         
         def get_html_images(images: list) -> str:
             list_images_link = []
@@ -100,9 +102,6 @@ class ReportWorker(object):
         
         LoggerTask.debug(f'Create new ticket resp in Odoo {resp}')
         
-        pass
-
-
         pass
 
     @classmethod
