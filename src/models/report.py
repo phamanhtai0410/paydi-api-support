@@ -35,3 +35,4 @@ class Report(BaseMG):
     pos_id = fields.CharField(blank=True)
     message = fields.CharField(blank=True)
     images = fields.ListField(field=fields.CharField(), blank=True)
+    version = fields.CharField(blank=True, default="")

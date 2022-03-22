@@ -17,13 +17,14 @@ class ReportWorker(object):
     @staticmethod
     def send_report_mess(data):
         if (data.get('type') == 'transaction'):
-            message = '<strong>{}: {} #{} </strong> ' \
+            message = '<strong>{}: {} #{} </strong> \n' \
                       '<pre>' \
                       '<i>Odoo Contact ID      : " {} "</i> \n' \
                       '<i>Account ID           : " {} "</i> \n' \
                       '<i>Serial Number        : " {} "</i> \n' \
                       '<i>Device ID            : " {} "</i> \n' \
                       '<i>Pos ID               : " {} "</i> \n' \
+                      '<i>App Version          : " {} "</i> \n' \
                       '<i>Message              : " {} "</i> \n' \
                       '</pre> ' \
                       '<a href="#">👉👉👉 Chi tiết</a> \n' \
@@ -35,15 +36,17 @@ class ReportWorker(object):
                         data.get('serial_number'),
                         data.get('device_id'),
                         data.get('pos_id'),
+                        data.get('version'),
                         data.get('message'))
         else:
-            message = '<strong>{}: {} </strong> ' \
+            message = '<strong>{}: {} </strong> \n' \
                       '<pre>' \
                       '<i>Odoo Contact ID      : " {} "</i> \n' \
                       '<i>Account ID           : " {} "</i> \n' \
                       '<i>Serial Number        : " {} "</i> \n' \
                       '<i>Device ID            : " {} "</i> \n' \
                       '<i>Pos ID               : " {} "</i> \n' \
+                      '<i>App Version          : " {} "</i> \n' \
                       '<i>Message              : " {} "</i> \n' \
                       '</pre> ' \
                       '<a href="#">👉👉👉 Chi tiết</a> \n' \
@@ -54,6 +57,7 @@ class ReportWorker(object):
                         data.get('serial_number'),
                         data.get('device_id'),
                         data.get('pos_id'),
+                        data.get('version'),
                         data.get('message'))
 
         result = send_telegram_message(token_id=DefaultConfig.TELE_SUPPORT_TOKEN_ID,
@@ -87,8 +91,9 @@ class ReportWorker(object):
                             <div><strong>4. </strong>Serial Number : {data.get('serial_number')}</div> \
                             <div><strong>5. </strong>Account ID : {data.get('account_id')}</div> \
                             <div><strong>6. </strong>POS ID : {data.get('pos_id')}</div> \
-                            <div><strong>7. </strong>Message : {data.get('message')}</div> \
-                            <div><strong>8. </strong>Images : {images}</div>"
+                            <div><strong>7. </strong>App Version : {data.get('version')}</div> \
+                            <div><strong>8. </strong>Message : {data.get('message')}</div> \
+                            <div><strong>9. </strong>Images : {images}</div>"
                             
         resp = make_request(
             url=crm_url + '/iapi/v1/helpdesk/tickets/create',

@@ -9,6 +9,7 @@
         -
 """
 from os import terminal_size
+from importlib_metadata import version
 from marshmallow import Schema, fields, INCLUDE, EXCLUDE
 
 from paydi_lib.schema import BaseResponse
@@ -36,6 +37,7 @@ class CreateReport(Schema):
     oid = fields.String(default='app_oid')
     message = fields.String(allow_none=True, missing='')
     images = fields.List(fields.String(), allow_none=True, missing=[])
+    version = fields.String(allow_none=False)
 
 
 ########################################################################################
@@ -57,6 +59,7 @@ class ReportResponse(Schema, BaseResponse):
     pos_id = fields.String()
     message = fields.String()
     images = fields.List(fields.String())
+    version = fields.String(allow_none=False)
 
 
 class GetListReportsResponse(Schema, BaseResponse):
